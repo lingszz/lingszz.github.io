@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="使用Kali进行部署  部署过程中存在一些小坑不过问题不大 1 npm环境部署例如在部署 npm 后出现的 EACCES 权限错误问题，可以通过由 npmjs 发布的指导解决该问题   123456789101112131415sudo apt update &amp;&amp; sudo apt upgradesudo apt install npm#若出现npm的EACCES权限错误问题，执">
+<meta property="og:type" content="article">
+<meta property="og:title" content="部署hexo博客">
+<meta property="og:url" content="https://lingszz.github.io/2023/03/25/%E9%83%A8%E7%BD%B2hexo%E5%8D%9A%E5%AE%A2/index.html">
+<meta property="og:site_name" content="Lings Blog">
+<meta property="og:description" content="使用Kali进行部署  部署过程中存在一些小坑不过问题不大 1 npm环境部署例如在部署 npm 后出现的 EACCES 权限错误问题，可以通过由 npmjs 发布的指导解决该问题   123456789101112131415sudo apt update &amp;&amp; sudo apt upgradesudo apt install npm#若出现npm的EACCES权限错误问题，执">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-25T21:53:28.000Z">
+<meta property="article:modified_time" content="2023-03-26T10:06:07.124Z">
+<meta property="article:author" content="Lings">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>部署hexo博客</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/lingszz/lingszz.github.io">项目</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2023/03/25/Kali%E6%9B%BF%E6%8D%A2%E9%95%9C%E5%83%8F%E6%BA%90/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://lingszz.github.io/2023/03/25/%E9%83%A8%E7%BD%B2hexo%E5%8D%9A%E5%AE%A2/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://lingszz.github.io/2023/03/25/%E9%83%A8%E7%BD%B2hexo%E5%8D%9A%E5%AE%A2/&text=部署hexo博客"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://lingszz.github.io/2023/03/25/%E9%83%A8%E7%BD%B2hexo%E5%8D%9A%E5%AE%A2/&title=部署hexo博客"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://lingszz.github.io/2023/03/25/%E9%83%A8%E7%BD%B2hexo%E5%8D%9A%E5%AE%A2/&is_video=false&description=部署hexo博客"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=部署hexo博客&body=Check out this article: https://lingszz.github.io/2023/03/25/%E9%83%A8%E7%BD%B2hexo%E5%8D%9A%E5%AE%A2/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://lingszz.github.io/2023/03/25/%E9%83%A8%E7%BD%B2hexo%E5%8D%9A%E5%AE%A2/&title=部署hexo博客"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://lingszz.github.io/2023/03/25/%E9%83%A8%E7%BD%B2hexo%E5%8D%9A%E5%AE%A2/&title=部署hexo博客"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://lingszz.github.io/2023/03/25/%E9%83%A8%E7%BD%B2hexo%E5%8D%9A%E5%AE%A2/&title=部署hexo博客"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://lingszz.github.io/2023/03/25/%E9%83%A8%E7%BD%B2hexo%E5%8D%9A%E5%AE%A2/&title=部署hexo博客"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://lingszz.github.io/2023/03/25/%E9%83%A8%E7%BD%B2hexo%E5%8D%9A%E5%AE%A2/&name=部署hexo博客&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://lingszz.github.io/2023/03/25/%E9%83%A8%E7%BD%B2hexo%E5%8D%9A%E5%AE%A2/&t=部署hexo博客"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-npm%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2"><span class="toc-number">1.</span> <span class="toc-text">1 npm环境部署</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Hexo%E9%83%A8%E7%BD%B2"><span class="toc-number">2.</span> <span class="toc-text">2 Hexo部署</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E9%83%A8%E7%BD%B2-hexo-theme-cactus"><span class="toc-number">3.</span> <span class="toc-text">3 部署 hexo-theme-cactus</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E5%85%88%E5%86%B3%E6%9D%A1%E4%BB%B6"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 先决条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E5%AE%89%E8%A3%85"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E9%83%A8%E7%BD%B2%E5%88%B0-Github"><span class="toc-number">4.</span> <span class="toc-text">4 部署到 Github</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        部署hexo博客
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Lings</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-03-25T21:53:28.000Z" itemprop="datePublished">2023-03-26</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <blockquote>
+<p>使用Kali进行部署</p>
+</blockquote>
+<p>部署过程中存在一些小坑不过问题不大</p>
+<h2 id="1-npm环境部署"><a href="#1-npm环境部署" class="headerlink" title="1 npm环境部署"></a>1 npm环境部署</h2><p>例如在部署 npm 后出现的 EACCES 权限错误问题，可以通过<a target="_blank" rel="noopener" href="https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally">由 npmjs 发布的指导</a>解决该问题</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update &amp;&amp; sudo apt upgrade</span><br><span class="line"></span><br><span class="line">sudo apt install npm</span><br><span class="line"></span><br><span class="line"><span class="comment">#若出现npm的EACCES权限错误问题，执行以下代码</span></span><br><span class="line"><span class="built_in">mkdir</span> ~/.npm-global</span><br><span class="line"></span><br><span class="line">npm config <span class="built_in">set</span> prefix <span class="string">&#x27;~/.npm-global&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># export PATH=~/.npm-global/bin:$PATH 在Kali中需要添加在 /etc/zsh/zshrc 的末尾</span></span><br><span class="line">sudo mousepad /etc/zsh/zshrc</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> PATH=~/.npm-global/bin:<span class="variable">$PATH</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">source</span> ~/.profile</span><br></pre></td></tr></table></figure>
+<h2 id="2-Hexo部署"><a href="#2-Hexo部署" class="headerlink" title="2 Hexo部署"></a>2 Hexo部署</h2><p>更详细的部署方案可见<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo官方部署文档</a></p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br><span class="line"><span class="comment">#执行 source ~/.profile (或者重启一下电脑)就可以直接使用 hexo 命令了</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-部署-hexo-theme-cactus"><a href="#3-部署-hexo-theme-cactus" class="headerlink" title="3 部署 hexo-theme-cactus"></a>3 部署 hexo-theme-cactus</h2><p>更详细的部署方案可见<a target="_blank" rel="noopener" href="https://github.com/probberechts/hexo-theme-cactus">hexo-theme-cactus官方部署文档</a></p>
+<p>没啥坑随便部署</p>
+<h3 id="3-1-先决条件"><a href="#3-1-先决条件" class="headerlink" title="3.1 先决条件"></a>3.1 先决条件</h3><ol>
+<li>创建Hexo工作目录:</li>
+</ol>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init my-blog</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>进入Hexo工作目录:</li>
+</ol>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> my-blog</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-安装"><a href="#3-2-安装" class="headerlink" title="3.2 安装"></a>3.2 安装</h3><ol>
+<li>在Hexo工作目录中:</li>
+</ol>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/probberechts/hexo-theme-cactus.git themes/cactus</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>更改 <code>_config.yml</code> 文件中的主题属性.</li>
+</ol>
+  <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># theme: landscape</span></span><br><span class="line"><span class="attr">theme:</span> <span class="string">cactus</span></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>使用 <code>hexo new [layout] &lt;title&gt;</code> 命令创建页面和文章。例如，要创建一个<code>about</code>页面，运行:</li>
+</ol>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page about</span><br></pre></td></tr></table></figure>
+<p>   这将在 <code>source/about/index.md</code> 中创建一个新文件.同样，您可以创建一篇新文章</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new post <span class="string">&quot;hello world&quot;</span></span><br></pre></td></tr></table></figure>
+<p>   并在 source&#x2F;_posts&#x2F;hello-world.md 中添加一些有趣的内容。</p>
+<ol start="4">
+<li>运行：<code>hexo generate</code> 和 <code>hexo server</code></li>
+</ol>
+<h2 id="4-部署到-Github"><a href="#4-部署到-Github" class="headerlink" title="4 部署到 Github"></a>4 部署到 Github</h2><p>部署时的repo值应为<code>https://oauth2:ghp_********@github.com/yourusername/yourusername.github.io</code></p>
+<p>需要申请Github账户的token <a target="_blank" rel="noopener" href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token">创建 GitHub 个人访问令牌</a></p>
+<ol>
+<li>安装 hexo-deployer-git。</li>
+</ol>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>修改配置。</li>
+</ol>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: &lt;repository url&gt; <span class="comment">#https://oauth2:ghp_********@github.com/yourusername/yourusername.github.io</span></span><br><span class="line">  branch: [branch]</span><br><span class="line">  message: [message]</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th align="center">参数</th>
+<th align="center">描述</th>
+<th align="center">默认</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">repo</td>
+<td align="center">库（Repository）地址</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">branch</td>
+<td align="center">分支名称</td>
+<td align="center">gh-pages (GitHub) <br/> coding-pages (Coding.net) <br /> master(others)</td>
+</tr>
+<tr>
+<td align="center">message</td>
+<td align="center">自定义提交信息</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">token</td>
+<td align="center">可选的令牌值，用于认证 repo。用 $ 作为前缀从而从环境变量中读取令牌</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<ol start="3">
+<li>生成站点文件并推送至远程库。执行 <code>hexo clean &amp;&amp; hexo deploy</code> 。</li>
+</ol>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://github.com/lingszz/lingszz.github.io">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-npm%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2"><span class="toc-number">1.</span> <span class="toc-text">1 npm环境部署</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Hexo%E9%83%A8%E7%BD%B2"><span class="toc-number">2.</span> <span class="toc-text">2 Hexo部署</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E9%83%A8%E7%BD%B2-hexo-theme-cactus"><span class="toc-number">3.</span> <span class="toc-text">3 部署 hexo-theme-cactus</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E5%85%88%E5%86%B3%E6%9D%A1%E4%BB%B6"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 先决条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E5%AE%89%E8%A3%85"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E9%83%A8%E7%BD%B2%E5%88%B0-Github"><span class="toc-number">4.</span> <span class="toc-text">4 部署到 Github</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://lingszz.github.io/2023/03/25/%E9%83%A8%E7%BD%B2hexo%E5%8D%9A%E5%AE%A2/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://lingszz.github.io/2023/03/25/%E9%83%A8%E7%BD%B2hexo%E5%8D%9A%E5%AE%A2/&text=部署hexo博客"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://lingszz.github.io/2023/03/25/%E9%83%A8%E7%BD%B2hexo%E5%8D%9A%E5%AE%A2/&title=部署hexo博客"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://lingszz.github.io/2023/03/25/%E9%83%A8%E7%BD%B2hexo%E5%8D%9A%E5%AE%A2/&is_video=false&description=部署hexo博客"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=部署hexo博客&body=Check out this article: https://lingszz.github.io/2023/03/25/%E9%83%A8%E7%BD%B2hexo%E5%8D%9A%E5%AE%A2/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://lingszz.github.io/2023/03/25/%E9%83%A8%E7%BD%B2hexo%E5%8D%9A%E5%AE%A2/&title=部署hexo博客"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://lingszz.github.io/2023/03/25/%E9%83%A8%E7%BD%B2hexo%E5%8D%9A%E5%AE%A2/&title=部署hexo博客"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://lingszz.github.io/2023/03/25/%E9%83%A8%E7%BD%B2hexo%E5%8D%9A%E5%AE%A2/&title=部署hexo博客"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://lingszz.github.io/2023/03/25/%E9%83%A8%E7%BD%B2hexo%E5%8D%9A%E5%AE%A2/&title=部署hexo博客"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://lingszz.github.io/2023/03/25/%E9%83%A8%E7%BD%B2hexo%E5%8D%9A%E5%AE%A2/&name=部署hexo博客&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://lingszz.github.io/2023/03/25/%E9%83%A8%E7%BD%B2hexo%E5%8D%9A%E5%AE%A2/&t=部署hexo博客"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2023
+    Lings
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/lingszz/lingszz.github.io">项目</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
