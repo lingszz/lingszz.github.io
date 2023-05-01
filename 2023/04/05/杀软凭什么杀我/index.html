@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="杀软凭什么杀我  正如 VirusTotal 在他们的 yara 储存库中所说，YARA是一个旨在(但不限于)帮助恶意软件研究人员识别和分类恶意软件样本。使用YARA，您可以创建描述基于文本或二进制的恶意软件家族(或任何你想描述的)模式。每个描述，也就是规则，由一组字符串和一个决定其逻辑的布尔表达式。 有大量的杀毒软件使用了yara规则，包括我们熟知的 ESET 、FireEye, Inc. 、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="杀软凭什么杀我">
+<meta property="og:url" content="https://lingszz.github.io/2023/04/05/%E6%9D%80%E8%BD%AF%E5%87%AD%E4%BB%80%E4%B9%88%E6%9D%80%E6%88%91/index.html">
+<meta property="og:site_name" content="Lings Blog">
+<meta property="og:description" content="杀软凭什么杀我  正如 VirusTotal 在他们的 yara 储存库中所说，YARA是一个旨在(但不限于)帮助恶意软件研究人员识别和分类恶意软件样本。使用YARA，您可以创建描述基于文本或二进制的恶意软件家族(或任何你想描述的)模式。每个描述，也就是规则，由一组字符串和一个决定其逻辑的布尔表达式。 有大量的杀毒软件使用了yara规则，包括我们熟知的 ESET 、FireEye, Inc. 、">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-05T08:53:28.000Z">
+<meta property="article:modified_time" content="2023-04-16T14:22:30.563Z">
+<meta property="article:author" content="Lings">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>杀软凭什么杀我</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/lingszz/lingszz.github.io">项目</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2023/04/06/Linux%E7%BB%B4%E6%9D%83/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2023/03/31/%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E9%9A%90%E5%86%99/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://lingszz.github.io/2023/04/05/%E6%9D%80%E8%BD%AF%E5%87%AD%E4%BB%80%E4%B9%88%E6%9D%80%E6%88%91/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://lingszz.github.io/2023/04/05/%E6%9D%80%E8%BD%AF%E5%87%AD%E4%BB%80%E4%B9%88%E6%9D%80%E6%88%91/&text=杀软凭什么杀我"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://lingszz.github.io/2023/04/05/%E6%9D%80%E8%BD%AF%E5%87%AD%E4%BB%80%E4%B9%88%E6%9D%80%E6%88%91/&title=杀软凭什么杀我"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://lingszz.github.io/2023/04/05/%E6%9D%80%E8%BD%AF%E5%87%AD%E4%BB%80%E4%B9%88%E6%9D%80%E6%88%91/&is_video=false&description=杀软凭什么杀我"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=杀软凭什么杀我&body=Check out this article: https://lingszz.github.io/2023/04/05/%E6%9D%80%E8%BD%AF%E5%87%AD%E4%BB%80%E4%B9%88%E6%9D%80%E6%88%91/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://lingszz.github.io/2023/04/05/%E6%9D%80%E8%BD%AF%E5%87%AD%E4%BB%80%E4%B9%88%E6%9D%80%E6%88%91/&title=杀软凭什么杀我"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://lingszz.github.io/2023/04/05/%E6%9D%80%E8%BD%AF%E5%87%AD%E4%BB%80%E4%B9%88%E6%9D%80%E6%88%91/&title=杀软凭什么杀我"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://lingszz.github.io/2023/04/05/%E6%9D%80%E8%BD%AF%E5%87%AD%E4%BB%80%E4%B9%88%E6%9D%80%E6%88%91/&title=杀软凭什么杀我"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://lingszz.github.io/2023/04/05/%E6%9D%80%E8%BD%AF%E5%87%AD%E4%BB%80%E4%B9%88%E6%9D%80%E6%88%91/&title=杀软凭什么杀我"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://lingszz.github.io/2023/04/05/%E6%9D%80%E8%BD%AF%E5%87%AD%E4%BB%80%E4%B9%88%E6%9D%80%E6%88%91/&name=杀软凭什么杀我&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://lingszz.github.io/2023/04/05/%E6%9D%80%E8%BD%AF%E5%87%AD%E4%BB%80%E4%B9%88%E6%9D%80%E6%88%91/&t=杀软凭什么杀我"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Google-%E2%80%9C%E8%AE%A9%E5%A8%81%E8%83%81%E8%A1%8C%E4%B8%BA%E8%80%85%E6%9B%B4%E9%9A%BE%E6%BB%A5%E7%94%A8-Cobalt-Strike%E2%80%9D"><span class="toc-number">1.</span> <span class="toc-text">1 Google: “让威胁行为者更难滥用 Cobalt Strike”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%85%AC%E5%BC%80%E7%9A%84-Yara-Iocs"><span class="toc-number">2.</span> <span class="toc-text">2 公开的 Yara Iocs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E9%80%9A%E8%BF%87-YARA-%E8%A7%84%E5%88%99%E5%85%8D%E6%9D%80%E7%9A%84%E6%9E%84%E6%83%B3"><span class="toc-number">3.</span> <span class="toc-text">3 通过 YARA 规则免杀的构想</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Microsoft-Defender-%E6%9C%89-XDR"><span class="toc-number">4.</span> <span class="toc-text">4 Microsoft Defender 有 XDR</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        杀软凭什么杀我
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Lings</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-04-05T08:53:28.000Z" itemprop="datePublished">2023-04-05</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <blockquote>
+<p>杀软凭什么杀我</p>
+</blockquote>
+<p>正如 VirusTotal 在他们的 <a target="_blank" rel="noopener" href="https://github.com/VirusTotal/yara">yara</a> 储存库中所说，YARA是一个旨在(但不限于)帮助恶意软件研究人员识别和分类恶意软件样本。使用YARA，您可以创建描述基于文本或二进制的恶意软件家族(或任何你想描述的)模式。每个描述，也就是规则，由一组字符串和一个决定其逻辑的布尔表达式。</p>
+<p>有大量的杀毒软件使用了yara规则，包括我们熟知的 ESET 、FireEye, Inc. 、Kaspersky Lab 、McAfee Advanced Threat Defense 、Cybereason </p>
+<p>无论静态查杀、内存扫描还是流量分析，都能看到 yara 的身影，可以说 yara 规则是现代杀软查杀的关键。(动态查杀我不是很懂，只知道HOOK NTDLL和在进程中注入DLL，是真滴菜)</p>
+<h2 id="1-Google-“让威胁行为者更难滥用-Cobalt-Strike”"><a href="#1-Google-“让威胁行为者更难滥用-Cobalt-Strike”" class="headerlink" title="1 Google: “让威胁行为者更难滥用 Cobalt Strike”"></a>1 <a target="_blank" rel="noopener" href="https://cloud.google.com/blog/products/identity-security/making-cobalt-strike-harder-for-threat-actors-to-abuse">Google: “让威胁行为者更难滥用 Cobalt Strike”</a></h2><p>在Google “让威胁行为者更难滥用 Cobalt Strike” 一文中作者阐释了通过查找1.44版(大约2012年)到4.7版(作者发布博客时的最新版本)的 Cobalt Strike JAR 文件版本，并对 stager、templates、beacons 包括 Cobalt Strike 自1.44版以来使用的 XOR 编码并进行分类，借助可用的 Cobalt Strike 组件集，作者对野外这些恶意变体构建了基于 YARA 的高精度检测。每个 CobaltStrike 版本包含大约10到100个攻击模板二进制文件。作者发现了34个不同的 Cobalt Strike 发行版本，这些版本中总共有275个独特的JAR文件。总而言之，作者估计至少有340个二进制文件必须被分析并写入签名以检测它们。对于 Cobalt Strike 的每个发布版本，作者通常会创建一个新的、唯一的 beacons component。然而，stager 和 emplates 在各个版本中往往更加一致。在不同版本中寻找独特的 stager、templates 和 beacons，总共生成了165个签名来检测 Cobalt Strike 版本中的这些 Cobalt Strike 组件，直至并包括4.7版。</p>
+<p>作者说：“我们的目标是进行高保真检测，以精确定位特定 Cobalt Strike 组件的确切版本。只要有可能，我们都会构建签名来检测 Cobalt Strike 组件的特定版本。”</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/chronicle/GCTI">Google - Cobalt Strike And Sliver Yara Iocs</a></p>
+<h2 id="2-公开的-Yara-Iocs"><a href="#2-公开的-Yara-Iocs" class="headerlink" title="2 公开的 Yara Iocs"></a>2 公开的 Yara Iocs</h2><p>通过使用Github检索可以查询到一些可以为我们提供帮助的Yara数据，</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/search?l=yara&o=desc&q=IOC&s=stars&type=Repositories">l:yara - o:desc - q:IOC - s:stars - type:Repositories</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/search?q=yara">q:yara</a></p>
+<p>项目推荐(其实是方便自己打开):</p>
+<ol>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/eset/malware-ioc">eset&#x2F;malware-ioc</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/sophoslabs/IoCs">sophoslabs&#x2F;IoCs</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/Yara-Rules/rules">Yara-Rules&#x2F;rules</a></p>
+<p> 该项目满足一组 IT 安全研究人员的需求，即拥有一个单一的存储库，其中编译、分类不同的 Yara 签名并尽可能保持最新，并开始作为一个收集 Yara 规则的开源社区。 我们的 Yara 规则集遵循 GNU-GPLv2 许可并向任何用户或组织开放，只要您在此许可下使用它即可。</p>
+<p> Yara 的使用越来越广泛，但有关该工具及其用法的知识分散在许多不同的地方。 Yara Rules 项目旨在通过收集尽可能完整的规则集，成为 Yara 用户的交汇点，从而为用户提供快速准备好使用 Yara 的方法。 </p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/InQuest/awesome-yara">InQuest&#x2F;awesome-yara</a></p>
+<p> 精选的 YARA 规则、工具和资源列表。 </p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/Neo23x0/Loki">Neo23x0&#x2F;Loki</a></p>
+<p> 简单的 IOC 和 YARA 扫描仪 </p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/Neo23x0/signature-base">Neo23x0&#x2F;signature-base</a></p>
+<p> Loki 的 YARA IOC 库</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/advanced-threat-research/Yara-Rules">advanced-threat-research&#x2F;Yara-Rules</a></p>
+<p> Trellix ATR 团队制作的 YARA 规则库</p>
+</li>
+</ol>
+<h2 id="3-通过-YARA-规则免杀的构想"><a href="#3-通过-YARA-规则免杀的构想" class="headerlink" title="3 通过 YARA 规则免杀的构想"></a>3 通过 YARA 规则免杀的构想</h2><p>通过 YARA 规则快速定位查杀点，达到在编写代码时能清楚的认知到某行代码被查杀的可能减少免杀的工作量</p>
+<h2 id="4-Microsoft-Defender-有-XDR"><a href="#4-Microsoft-Defender-有-XDR" class="headerlink" title="4 Microsoft Defender 有 XDR"></a>4 Microsoft Defender 有 XDR</h2><p><a target="_blank" rel="noopener" href="https://www.microsoft.com/zh-cn/security/business/siem-and-xdr/microsoft-defender-threat-intelligence">microsoft-defender-threat-intelligence</a></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://github.com/lingszz/lingszz.github.io">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Google-%E2%80%9C%E8%AE%A9%E5%A8%81%E8%83%81%E8%A1%8C%E4%B8%BA%E8%80%85%E6%9B%B4%E9%9A%BE%E6%BB%A5%E7%94%A8-Cobalt-Strike%E2%80%9D"><span class="toc-number">1.</span> <span class="toc-text">1 Google: “让威胁行为者更难滥用 Cobalt Strike”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%85%AC%E5%BC%80%E7%9A%84-Yara-Iocs"><span class="toc-number">2.</span> <span class="toc-text">2 公开的 Yara Iocs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E9%80%9A%E8%BF%87-YARA-%E8%A7%84%E5%88%99%E5%85%8D%E6%9D%80%E7%9A%84%E6%9E%84%E6%83%B3"><span class="toc-number">3.</span> <span class="toc-text">3 通过 YARA 规则免杀的构想</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Microsoft-Defender-%E6%9C%89-XDR"><span class="toc-number">4.</span> <span class="toc-text">4 Microsoft Defender 有 XDR</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://lingszz.github.io/2023/04/05/%E6%9D%80%E8%BD%AF%E5%87%AD%E4%BB%80%E4%B9%88%E6%9D%80%E6%88%91/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://lingszz.github.io/2023/04/05/%E6%9D%80%E8%BD%AF%E5%87%AD%E4%BB%80%E4%B9%88%E6%9D%80%E6%88%91/&text=杀软凭什么杀我"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://lingszz.github.io/2023/04/05/%E6%9D%80%E8%BD%AF%E5%87%AD%E4%BB%80%E4%B9%88%E6%9D%80%E6%88%91/&title=杀软凭什么杀我"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://lingszz.github.io/2023/04/05/%E6%9D%80%E8%BD%AF%E5%87%AD%E4%BB%80%E4%B9%88%E6%9D%80%E6%88%91/&is_video=false&description=杀软凭什么杀我"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=杀软凭什么杀我&body=Check out this article: https://lingszz.github.io/2023/04/05/%E6%9D%80%E8%BD%AF%E5%87%AD%E4%BB%80%E4%B9%88%E6%9D%80%E6%88%91/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://lingszz.github.io/2023/04/05/%E6%9D%80%E8%BD%AF%E5%87%AD%E4%BB%80%E4%B9%88%E6%9D%80%E6%88%91/&title=杀软凭什么杀我"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://lingszz.github.io/2023/04/05/%E6%9D%80%E8%BD%AF%E5%87%AD%E4%BB%80%E4%B9%88%E6%9D%80%E6%88%91/&title=杀软凭什么杀我"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://lingszz.github.io/2023/04/05/%E6%9D%80%E8%BD%AF%E5%87%AD%E4%BB%80%E4%B9%88%E6%9D%80%E6%88%91/&title=杀软凭什么杀我"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://lingszz.github.io/2023/04/05/%E6%9D%80%E8%BD%AF%E5%87%AD%E4%BB%80%E4%B9%88%E6%9D%80%E6%88%91/&title=杀软凭什么杀我"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://lingszz.github.io/2023/04/05/%E6%9D%80%E8%BD%AF%E5%87%AD%E4%BB%80%E4%B9%88%E6%9D%80%E6%88%91/&name=杀软凭什么杀我&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://lingszz.github.io/2023/04/05/%E6%9D%80%E8%BD%AF%E5%87%AD%E4%BB%80%E4%B9%88%E6%9D%80%E6%88%91/&t=杀软凭什么杀我"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2023
+    Lings
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/lingszz/lingszz.github.io">项目</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
